@@ -24,15 +24,13 @@ class M:
         self.baz = 121
 ```
 
-To watch the changes, you need the add the ```@watch```  as a class decorator and ```watch_dict``` as a class variable.
-
-```watch_dict``` keys should be selected from ```__init__``` or ```class``` variables and the values can be defined as a ```set```, ```get``` and ```del```.
-from objerve import watch
+To watch the changes, you need the add the ```@watch()```  as a class decorator. Within the arguments of the ``watch`` decorator you should pass in lists for the keyword arguments of the attributes you wish to watch.
 
 ```python
-@watch
+from objerve import watch
+
+@watch(set={"foo", "qux"}, get={"bar"}, delete={"baz"})
 class M:
-    watch_dict = {"foo": "set", "bar": "get", "baz": "del", "qux": "set"}
     qux = "blue"
 
     def __init__(self):

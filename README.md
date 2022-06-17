@@ -29,7 +29,7 @@ To watch the changes, you need the add the ```@watch()```  as a class decorator.
 ```python
 from objerve import watch
 
-@watch(set={"foo", "qux"}, get={"bar"}, delete={"baz"})
+@watch(set={"foo", "qux"}, get={"bar", "foo"}, delete={"baz"})
 class M:
     qux = "blue"
 
@@ -55,28 +55,37 @@ def get_foo(m):
 
 
 abc()
+m.foo
 del m.baz
 get_foo(m)
 ```
 Output:
 ```sh
 Set | foo = 89
-  File "/home/blue/objerve/examples/example.py", line 11, in __init__
+  File "D:\dev\objerve\example.py", line 9, in __init__
     self.foo = 89
 
 Set | qux = red
-  File "/home/blue/objerve/examples/example.py", line 23, in <module>
+  File "D:\dev\objerve\example.py", line 21, in <module>
     m.qux = "red"
 
-Set | foo = 99
-  File "/home/blue/objerve/examples/example.py", line 20, in abc
+Get | foo
+  File "D:\dev\objerve\example.py", line 18, in abc
     m.foo += 10
 
+Set | foo = 99
+  File "D:\dev\objerve\example.py", line 18, in abc
+    m.foo += 10
+
+Get | foo
+  File "D:\dev\objerve\example.py", line 29, in <module>
+    m.foo
+
 Delete | baz
-  File "/home/blue/objerve/examples/example.py", line 31, in <module>
+  File "D:\dev\objerve\example.py", line 30, in <module>
     del m.baz
 
 Get | bar
-  File "/home/blue/objerve/examples/example.py", line 27, in get_foo
+  File "D:\dev\objerve\example.py", line 25, in get_foo
     m.bar
 ```

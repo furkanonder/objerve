@@ -6,9 +6,6 @@ class Descriptor:
         self.attribute = f"_{attribute}"
         self.hooks = hooks
 
-    def add_hook(self, hook):
-        self.hooks.append(hook)
-
     def __set__(self, instance, value):
         if "set" in self.hooks:
             print(f"Set | {self.attribute[1:]} = {value}")

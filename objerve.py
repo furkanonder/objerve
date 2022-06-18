@@ -1,4 +1,5 @@
 import traceback
+from collections import defaultdict
 
 
 class Descriptor:
@@ -30,13 +31,10 @@ class Descriptor:
 
 
 def watch(**kwargs):
-    attrs = {}
+    attrs = defaultdict(list)
     for hook in kwargs:
         for attr in kwargs[hook]:
-            if attr in attrs:
-                attrs[attr].append(hook)
-            else:
-                attrs[attr] = [hook]
+            attrs[attr].append(hook)
 
     def decorator(cls):
         for attr in attrs:

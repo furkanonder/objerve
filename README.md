@@ -24,15 +24,13 @@ class M:
         self.baz = 121
 ```
 
-To watch the changes, you need the add the ```@watch```  as a class decorator and ```watch_dict``` as a class variable.
-
-```watch_dict``` keys should be selected from ```__init__``` or ```class``` variables and the values can be defined as a ```set```, ```get``` and ```del```.
-from objerve import watch
+To watch the changes, you need the add the ```@watch()```  as a class decorator. Within the arguments of the ``watch`` decorator you should pass in lists for the keyword arguments of the attributes you wish to watch.
 
 ```python
-@watch
+from objerve import watch
+
+@watch(set={"foo", "qux"}, get={"bar", "foo"}, delete={"baz"})
 class M:
-    watch_dict = {"foo": "set", "bar": "get", "baz": "del", "qux": "set"}
     qux = "blue"
 
     def __init__(self):
@@ -57,28 +55,37 @@ def get_foo(m):
 
 
 abc()
+m.foo
 del m.baz
 get_foo(m)
 ```
 Output:
 ```sh
 Set | foo = 89
-  File "/home/blue/objerve/examples/example.py", line 11, in __init__
+  File "D:\dev\objerve\example.py", line 9, in __init__
     self.foo = 89
 
 Set | qux = red
-  File "/home/blue/objerve/examples/example.py", line 23, in <module>
+  File "D:\dev\objerve\example.py", line 21, in <module>
     m.qux = "red"
 
-Set | foo = 99
-  File "/home/blue/objerve/examples/example.py", line 20, in abc
+Get | foo
+  File "D:\dev\objerve\example.py", line 18, in abc
     m.foo += 10
 
+Set | foo = 99
+  File "D:\dev\objerve\example.py", line 18, in abc
+    m.foo += 10
+
+Get | foo
+  File "D:\dev\objerve\example.py", line 29, in <module>
+    m.foo
+
 Delete | baz
-  File "/home/blue/objerve/examples/example.py", line 31, in <module>
+  File "D:\dev\objerve\example.py", line 30, in <module>
     del m.baz
 
 Get | bar
-  File "/home/blue/objerve/examples/example.py", line 27, in get_foo
+  File "D:\dev\objerve\example.py", line 25, in get_foo
     m.bar
 ```

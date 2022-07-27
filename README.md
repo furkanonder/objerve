@@ -62,30 +62,30 @@ get_foo(m)
 Output:
 ```sh
 Set | foo = 89
-  File "D:\dev\objerve\example.py", line 9, in __init__
+  File "/home/blue/objerve/examples/example.py", line 9, in __init__
     self.foo = 89
 
 Set | qux = red
-  File "D:\dev\objerve\example.py", line 21, in <module>
+  File "/home/blue/objerve/examples/example.py", line 21, in <module>
     m.qux = "red"
 
 Get | foo
-  File "D:\dev\objerve\example.py", line 18, in abc
+  File "/home/blue/objerve/examples/example.py", line 18, in abc
     m.foo += 10
 
 Set | foo = 99
-  File "D:\dev\objerve\example.py", line 18, in abc
+  File "/home/blue/objerve/examples/example.py", line 18, in abc
     m.foo += 10
 
 Get | foo
-  File "D:\dev\objerve\example.py", line 29, in <module>
+  File "/home/blue/objerve/examples/example.py", line 29, in <module>
     m.foo
 
 Delete | baz
-  File "D:\dev\objerve\example.py", line 30, in <module>
+  File "/home/blue/objerve/examples/example.py", line 30, in <module>
     del m.baz
 
 Get | bar
-  File "D:\dev\objerve\example.py", line 25, in get_foo
+  File "/home/blue/objerve/examples/example.py", line 25, in get_foo
     m.bar
 ```

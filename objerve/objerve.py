@@ -1,6 +1,8 @@
 import traceback
 from collections import defaultdict
 
+from objerve.color import GREEN, CYAN, set_color, YELLOW
+
 
 class Descriptor:
     def __init__(self, attribute, hooks, trace_limit):
@@ -10,25 +12,25 @@ class Descriptor:
 
     def __set__(self, instance, value):
         if "set" in self.hooks:
-            print(f"Set | {self.attribute[1:]} = {value}")
-            self.print_stack()
+            print(f"{set_color(CYAN, 'Set')} | {self.attribute[1:]} = {value}")
+            self.print_stack(CYAN)
         setattr(instance, self.attribute, value)
 
     def __get__(self, instance, owner):
         if "get" in self.hooks:
-            print(f"Get | {self.attribute[1:]}")
-            self.print_stack()
+            print(f"{set_color(GREEN, 'Get')} | {self.attribute[1:]}")
+            self.print_stack(GREEN)
         return getattr(instance, self.attribute, None)
 
     def __delete__(self, instance):
         if "delete" in self.hooks:
-            print(f"Delete | {self.attribute[1:]}")
-            self.print_stack()
+            print(f"{set_color(YELLOW, 'Delete')} | {self.attribute[1:]}")
+            self.print_stack(YELLOW)
         delattr(instance, self.attribute)
 
-    def print_stack(self):
+    def print_stack(self, color):
         summary, *_ = traceback.extract_stack(limit=self.trace_limit)
-        print(*traceback.format_list([summary]))
+        print(f"{set_color(color, *traceback.format_list([summary]))}")
 
 
 def watch(**kwargs):

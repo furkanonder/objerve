@@ -23,7 +23,7 @@ setup(
     url="https://github.com/furkanonder/objerve",
     license="MIT",
     python_requires=">=3.0",
-    py_modules=["objerve"],
+    packages=["objerve"],
     install_requires=[],
     extras_require={},
     zip_safe=False,

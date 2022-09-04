@@ -1,5 +1,6 @@
 from objerve import watch
 
+
 @watch(set={"foo", "qux"}, get={"bar", "foo"}, delete={"baz"})
 class M:
     qux = "blue"

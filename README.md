@@ -8,6 +8,7 @@
 </div>
 
 ## Installation
+
 _objerve_ can be installed by running `pip install objerve`
 
 ## Example Usage
@@ -24,7 +25,9 @@ class M:
         self.baz = 121
 ```
 
-To watch the changes, you need the add the ```@watch()```  as a class decorator. Within the arguments of the ``watch`` decorator you should pass in lists for the keyword arguments of the attributes you wish to watch.
+To watch the changes, you need the add the `@watch()` as a class decorator. Within the
+arguments of the `watch` decorator you should pass in lists for the keyword arguments of
+the attributes you wish to watch.
 
 ```python
 from objerve import watch
@@ -59,7 +62,9 @@ m.foo
 del m.baz
 get_foo(m)
 ```
+
 Output:
+
 ```sh
 Set | foo = 89
   File "/home/blue/objerve/examples/example.py", line 9, in __init__

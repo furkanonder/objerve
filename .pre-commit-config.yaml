@@ -15,7 +15,7 @@ repos:
     rev: 0.10.0
     hooks:
       - id: unimport
-        args: [--remove, --include-star-import]
+        args: [--remove, --include-star-import, --ignore-init]
 
   - repo: https://github.com/PyCQA/docformatter
     rev: v1.4

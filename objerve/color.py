@@ -52,7 +52,9 @@ def init_colors():
             buffer."""
             prototype = WINFUNCTYPE(BOOL, HANDLE, POINTER(DWORD))
             paramflags = ((1, "hConsoleHandle"), (2, "lpMode"))
-            function = prototype(("GetConsoleMode", windll.kernel32), paramflags)
+            function = prototype(
+                ("GetConsoleMode", windll.kernel32), paramflags
+            )
             function.errcheck = err_check
             return function
 
@@ -61,7 +63,9 @@ def init_colors():
             or the output mode of a console screen buffer."""
             prototype = WINFUNCTYPE(BOOL, HANDLE, DWORD)
             paramflags = ((1, "hConsoleHandle"), (1, "dwMode"))
-            function = prototype(("SetConsoleMode", windll.kernel32), paramflags)
+            function = prototype(
+                ("SetConsoleMode", windll.kernel32), paramflags
+            )
             function.errcheck = err_check
             return function
 

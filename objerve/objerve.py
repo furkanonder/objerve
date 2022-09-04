@@ -1,7 +1,7 @@
 import traceback
 from collections import defaultdict
 
-from objerve.color import GREEN, CYAN, set_color, YELLOW
+from objerve.color import CYAN, GREEN, YELLOW, set_color
 
 
 class Descriptor:

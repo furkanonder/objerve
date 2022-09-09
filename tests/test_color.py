@@ -19,7 +19,7 @@ class TestColor(unittest.TestCase):
     def test_terminal_color_support(self):
         init_colors()
 
-    @patch("bor.color.USE_COLOR", True)
+    @patch("objerve.color.USE_COLOR", True)
     def test_colors(self):
         text = "this is test text"
 
@@ -44,7 +44,7 @@ class TestColor(unittest.TestCase):
         colored_text = set_color(CYAN, text)
         assert CYAN + text + RESET == colored_text
 
-    @patch("bor.color.USE_COLOR", True)
+    @patch("objerve.color.USE_COLOR", True)
     def test_false_color(self):
         text = "this is test text"
         colored_text = set_color(YELLOW, text)

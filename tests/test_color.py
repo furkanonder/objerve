@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 
-from bor.color import (
+from objerve.color import (
     BLACK,
     BLUE,
     CYAN,

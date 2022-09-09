@@ -1,1 +1,1 @@
-from objerve.objerve import watch
+from objerve.objerve import Hook, watch

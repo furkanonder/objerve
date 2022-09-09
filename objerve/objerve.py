@@ -4,33 +4,39 @@ from collections import defaultdict
 from objerve.color import CYAN, GREEN, YELLOW, set_color
 
 
-class Descriptor:
-    def __init__(self, attribute, hooks, trace_limit):
-        self.attribute = f"_{attribute}"
+class Hook:
+    def __init__(self, name, hooks, trace_limit):
+        self.public_name = name
+        self.private_name = f"_{name}"
         self.hooks = hooks
         self.trace_limit = trace_limit
 
-    def __set__(self, instance, value):
+    def __set__(self, obj, value):
         if "set" in self.hooks:
-            print(f"{set_color(CYAN, 'Set')} | {self.attribute[1:]} = {value}")
-            self.print_stack(CYAN)
-        setattr(instance, self.attribute, value)
+            self.print_stack(CYAN, f"Set | {self.public_name} = {value}")
+        setattr(obj, self.private_name, value)
 
-    def __get__(self, instance, owner):
-        if "get" in self.hooks:
-            print(f"{set_color(GREEN, 'Get')} | {self.attribute[1:]}")
-            self.print_stack(GREEN)
-        return getattr(instance, self.attribute, None)
+    def __get__(self, obj, objtype=None):
+        if obj is None:
+            return self
+        else:
+            value = getattr(obj, self.private_name)
+            if "get" in self.hooks:
+                self.print_stack(GREEN, f"Get | {self.public_name} = {value}")
+            return value
 
     def __delete__(self, instance):
         if "delete" in self.hooks:
-            print(f"{set_color(YELLOW, 'Delete')} | {self.attribute[1:]}")
-            self.print_stack(YELLOW)
-        delattr(instance, self.attribute)
+            self.print_stack(YELLOW, f"Delete | {self.public_name}")
+        delattr(instance, self.private_name)
 
-    def print_stack(self, color):
+    def print_stack(self, color, msg):
         summary, *_ = traceback.extract_stack(limit=self.trace_limit)
-        print(f"{set_color(color, *traceback.format_list([summary]))}")
+        print(
+            set_color(
+                color, f"{msg}\n{' '.join(traceback.format_list([summary]))}"
+            )
+        )
 
 
 def watch(**kwargs):
@@ -43,7 +49,7 @@ def watch(**kwargs):
 
     def inner(cls):
         for attr in attrs:
-            setattr(cls, attr, Descriptor(attr, attrs[attr], trace_limit))
+            setattr(cls, attr, Hook(attr, attrs[attr], trace_limit))
         return cls
 
     return inner

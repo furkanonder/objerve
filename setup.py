@@ -13,7 +13,7 @@ def get_long_description():
 
 setup(
     name="objerve",
-    version="0.1.0",
+    version="0.2.0",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
     description="Tiny observer for the attributes of Python objects.",
@@ -23,7 +23,7 @@ setup(
     url="https://github.com/furkanonder/objerve",
     license="MIT",
     python_requires=">=3.0",
-    py_modules=["objerve"],
+    packages=["objerve"],
     install_requires=[],
     extras_require={},
     zip_safe=False,

@@ -1,9 +1,8 @@
 from objerve import watch
 
 
-@watch
+@watch(set={"foo", "qux"}, get={"bar", "foo"}, delete={"baz"})
 class M:
-    watch_dict = {"foo": "set", "bar": "get", "baz": "del", "qux": "set"}
     qux = "blue"
 
     def __init__(self):
@@ -28,5 +27,6 @@ def get_foo(m):
 
 
 abc()
+m.foo
 del m.baz
 get_foo(m)
